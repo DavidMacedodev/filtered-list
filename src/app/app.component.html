@@ -14,7 +14,7 @@
                   <th class="operations__table-cell operations__table-cell--white">Risco Operação</th>
               </tr>
           </thead>
-          <tbody *ngFor="let users of operations">
+          <tbody *ngFor="let users of (users$ | async)">
               <tr>
                   <td class="operations__table-cell">{{users.customerName}}</td>
                   <td class="operations__table-cell">
@@ -24,7 +24,7 @@
                       </p>
                   </td>
                   <td class="operations__table-cell">{{users.operationDate | date}}</td>
-                  <td class="operations__table-cell">{{users.operationDate}}</td>
+                  <td class="operations__table-cell">{{users.operationDate  }}</td>
                   <td class="operations__table-cell">{{users.operationValue}}</td>
                   <td class="operations__table-cell">{{users.operationRisck}}</td>
               </tr>
