@@ -10,9 +10,9 @@ import { operationsServices } from './services/operations.service';
 })
 export class AppComponent implements OnInit{
 
-  users$!: Observable<OperationsResponse>;
+  users$: Observable<OperationsResponse> | undefined;
 
-
+  searchTerm: string = '';
   constructor(
     private readonly _operationService: operationsServices
   ){}
@@ -21,4 +21,5 @@ export class AppComponent implements OnInit{
  ngOnInit() {
     this.users$ = this._operationService.getUsers()
  }
+
 }

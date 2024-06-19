@@ -1,6 +1,9 @@
 <div class="operations">
   <div class="operations__filter">
-      <input class="operations__filter-input" type="text" placeholder="Filtrar por Nome">
+      <input class="operations__filter-input"
+
+       [(ngModel)]="searchTerm"
+      type="text" placeholder="Filtrar por Nome">
   </div>
   <div class="operations__table">
       <table>
@@ -14,22 +17,23 @@
                   <th class="operations__table-cell operations__table-cell--white">Risco Operação</th>
               </tr>
           </thead>
-          <tbody *ngFor="let users of (users$ | async)">
+          <tbody *ngFor="let users of users$ | async | filter: 'customerName': searchTerm ">
               <tr>
                   <td class="operations__table-cell">{{users.customerName}}</td>
                   <td class="operations__table-cell">
                       <p class="operations__status">
-                         {{users.customerStatus}}
-                          <img src="assets/icons/active-icon.png" class="operations__icon" width="20" height="20" />
+                         {{users.customerStatus | status}}
+                          <img [src]="users.customerStatus | userStatusImage" class="operations__icon" width="20" height="20" />
                       </p>
                   </td>
-                  <td class="operations__table-cell">{{users.operationDate | date}}</td>
-                  <td class="operations__table-cell">{{users.operationDate  }}</td>
-                  <td class="operations__table-cell">{{users.operationValue}}</td>
-                  <td class="operations__table-cell">{{users.operationRisck}}</td>
+                  <td class="operations__table-cell">{{users.operationDate | date: 'dd/MM/YYYY'}}</td>
+                  <td class="operations__table-cell">{{users.operationDate | date: 'HH:mm: a': '0000'	}}</td>
+                  <td class="operations__table-cell">{{users.operationValue | currency: 'R$'}}</td>
+                  <td class="operations__table-cell">{{users.operationRisck | percent: '1.0-2'}}</td>
               </tr>
 
           </tbody>
       </table>
   </div>
 </div>
+
