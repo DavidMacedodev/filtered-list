@@ -5,8 +5,16 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class StatusPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value:number): string {
+
+    const INVALID_VALUE = value === undefined || value === null || value > 3 || value < 1;
+
+    if(INVALID_VALUE) {
+      return 'Status Invalido'
+    }
+
+    const status = value === 1 ? 'Ativo' : 'Inativo';
+    return status;
   }
 
 }
